@@ -1,0 +1,29 @@
+name: NethunttestonZ3Q
+
+on:
+  push:
+    tags: '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout kernel source
+      uses: actions/checkout@v2
+
+    - name: Android kernel build
+      uses: MK-986123/android_kernel_samsung_sm8250@android-12
+      id: build
+      env:
+        NAME: MK-pentest
+      with:
+        arch: arm64
+        compiler: gcc/10
+        defconfig: nethunter_test_defconfig
+        image: Image.gz-dtb
+
+    - name: Release build
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: ${{ steps.build.outputs.outfile }}
+        token: ${{ secrets.GITHUB_TOKEN }}
