@@ -1,4 +1,4 @@
-name: Build on Tag
+name: Nethunter
 
 on:
   push:
@@ -10,12 +10,6 @@ jobs:
     steps:
     - name: Checkout kernel source
       uses: actions/checkout@v2
-
-    - name: Checkout zipper
-      uses: actions/checkout@v2
-      with:
-        repository: MK-986123/android_kernel_samsung_sm8250
-        path: zipper
 
     - name: Android kernel build
       uses: MK-986123/android_kernel_samsung_sm8250@android-12
